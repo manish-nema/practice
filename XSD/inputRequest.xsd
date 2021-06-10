@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/ReqFileFormat2" xmlns:tns="http://www.example.org/ReqFileFormat2">
+<!--definition of simple elements-->
+<!--
+Response File Naming:
+CDR_SUSPECT: CSccccccccccccyxxzz
+CDR_CIRCLE: CCccccccccccccyxxzz
+CDR_TOWER: CTccccccccccccyxxzz
+SDR_SUSPECT: SSccccccccccccyxxzz
+SDR_CIRCLE: SCccccccccccccyxxzz
+SDR_CIRCLE_INCREMENTAL: SIccccccccccccyxxzz
+CAF_SUSPECT: SRccccccccccccyxxzz
+LOCATION_CELLID_ALL_CIRCLE: LAccccccccccccyxxzz
+LOCATION_CELLID_CIRCLE: LCccccccccccccyxxzz
+-->
+<!-- Root Elements -->
+<xsd:element name="Request" type="tns:RequestT"/>
+<!--End of Root Elements -->
+<!-- Definition of Complex Elements -->
+<xsd:complexType name="RequestT">
+<xsd:sequence>
+<xsd:element name="RequestDetails" minOccurs="1" maxOccurs="1" type="tns:RequestDetailsT" />
+<xsd:element name="RespFileProp" type="tns:RespFilePropT" minOccurs="1" maxOccurs="1" />
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestDetailsT">
+<xsd:sequence>
+<xsd:element name="RequestType" type="tns:RequestTypeT" minOccurs="1" maxOccurs="1"/>
+<xsd:element name="RequestEntity" type="tns:RequestEntityT" minOccurs="1" maxOccurs="1" />
+<xsd:element name="RequestTime" type="xsd:dateTime" minOccurs="1" maxOccurs="1" />
+<xsd:element name="StartDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
+<xsd:element name="EndDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
+<xsd:element name="ServiceType" type="tns:ServiceTypeT" minOccurs="1" maxOccurs="1" />
+<xsd:element name="Priority" type="tns:PriorityT" minOccurs="1" maxOccurs="1" />
+<!-- DataType field is applicable for CDR requests only so this field shall not be present in other requests-->
+<xsd:element name="DataType" type="tns:DataTypeT" minOccurs="0" maxOccurs="1" />
+<xsd:element name="Remarks" type="tns:RemarksT" minOccurs="0" maxOccurs="1" />
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="SuspectPropT">
+<xsd:sequence>
+<xsd:element name="SuspectNumber" minOccurs="1" maxOccurs="1" type="tns:SuspectNumberT"/>
+<xsd:element name="SuspectNumType" minOccurs="1" maxOccurs="1" type="tns:SuspectNumTypeT"/>
+<xsd:element name="SuspectNumPattern" minOccurs="1" maxOccurs="1" type="tns:SuspectNumPatternT"/>
+<xsd:element name="Circle" minOccurs="1" maxOccurs="1" type="tns:CircleNameT"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestEntityT">
+<xsd:choice>
+<xsd:element name="Tower" type="tns:TowerT" minOccurs="1" maxOccurs="1"/>
+<xsd:element name="Suspect" type="tns:SuspectPropT" minOccurs="1" maxOccurs="1"/>
+<xsd:element name="CircleName" type="tns:CircleNameT" minOccurs="1" maxOccurs="1"/>
+</xsd:choice>
+</xsd:complexType>
+<xsd:complexType name="RespFilePropT">
+<xsd:sequence>
+<xsd:element name="RespFileType" minOccurs="1" maxOccurs="1" type="tns:RespFileTypeT"/>
+<xsd:element name="RespFileName" minOccurs="1" maxOccurs="1" type="tns:RespFileNameT"/>
+<xsd:element name="RespFileHeader" minOccurs="1" maxOccurs="1" type="tns:RespFileHeaderT"/>
+<xsd:element name="RespFileMode" minOccurs="1" maxOccurs="1" type="tns:RespFileModeT"/>
+<xsd:element name="RespFilePath" minOccurs="0" maxOccurs="1" type="tns:RespFilePathT"/>
+<xsd:element name="RespSecretKey" minOccurs="1" maxOccurs="1" type="tns:RespSecretKeyT"/>
+<xsd:element name="RespInitializationVector" minOccurs="1" maxOccurs="1" type="tns:RespInitializationVectorT"/>
+</xsd:sequence>
+</xsd:complexType>
+<!-- End of Complex Elements -->
+<!-- Definition of Simple Elements -->
+<xsd:simpleType name="RequestTypeT">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="CDR_SUSPECT" />
+<xsd:enumeration value="CDR_TOWER" />
+<xsd:enumeration value="CDR_CIRCLE" />
+<xsd:enumeration value="SDR_SUSPECT" />
+<xsd:enumeration value="SDR_CIRCLE" />
+<xsd:enumeration value="SDR_CIRCLE_INCREMENTAL" />
+<xsd:enumeration value="CAF_SUSPECT" />
+<xsd:enumeration value="LOCATION_CELLID_ALL_CIRCLE" />
+<xsd:enumeration value="LOCATION_CELLID_CIRCLE" />
+</xsd:restriction>
+</xsd:simpleType>
+<!-- Target Number has to be in International Format(Without +) in case of MSISDN type-->
+<xsd:simpleType name="SuspectNumberT">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="20" />
+<xsd:pattern value="([0-9])*" />
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SuspectNumTypeT">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="MSISDN" />
+<xsd:enumeration value="IMSI" />
+<xsd:enumeration value="IMEI" />
+<xsd:enumeration value="MIN" />
+<xsd:enumeration value="ESN" />
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="SuspectNumPatternT">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Exact" />
+<!-- <xsd:enumeration value="Starting With" />
+<xsd:enumeration value="Ending With" />
+<xsd:enumeration value="Anywhere" />-->
+</xsd:restriction>
+</xsd:simpleType>
+<!-- Global Cellid has to be in International Format -->
+<xsd:complexType name="TowerT">
+<xsd:sequence>
+<xsd:element name="CellId" minOccurs="1" maxOccurs="3" type="tns:CellIdT"/>
+<xsd:element name="Circle" minOccurs="1" maxOccurs="1" type="tns:CircleNameT"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:simpleType name="CellIdT">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="20" /><xsd:pattern value="([0-9])*" />
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="CircleNameT">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="20" />
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="ServiceTypeT">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="GSM_VOICE" /><!-- When only GSM VOICE CDRs are requested-->
+<xsd:enumeration value="ILD_VOICE" /><!-- When ILD VOICE CDRs are requested-->
+<xsd:enumeration value="GSM_PACKET" /><!-- When only GSM Packet CDRs are requested-->
+<xsd:enumeration value="CDMA_VOICE" /><!-- When only CDMA VOICE CDRs are requested-->
+<xsd:enumeration value="CDMA_DATA" /><!-- When only CDMA Packet CDRs are requested-->
+<xsd:enumeration value="FIXED_VOICE" /><!-- When PSTN VOICE CDRs are requested-->
+<xsd:enumeration value="GSM" /><!-- case 1: When complete (Voice and Packet)GSM CDRs are requested
+case 2: When GSM SDR/CAF/Cell data is requested -->
+<xsd:enumeration value="CDMA" /><!-- case 1: When complete (Voice and Packet)CDMA CDRs are requested
+case 2: When CDMA SDR/CAF/Cell data is requested -->
+<xsd:enumeration value="ILD" /><!-- case 1: When complete ILD CDRs are requested
+case 2: When ILD SDR/CAF data is requested -->
+<xsd:enumeration value="FIXED" /><!-- case 1: When Complete PSTN CDRs are requested
+case 2: When PSTN SDR/CAF data is requested -->
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="DataTypeT">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="All" />
+<xsd:enumeration value="Roaming Only" />
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="PriorityT">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="LOW" />
+<xsd:enumeration value="HIGH" />
+<xsd:enumeration value="MEDIUM" />
+</xsd:restriction>
+</xsd:simpleType><xsd:simpleType name="RemarksT">
+<xsd:restriction base="xsd:string">
+<xsd:maxLength value="100" />
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="RespFileTypeT">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="doc" />
+<xsd:enumeration value="docx" />
+<xsd:enumeration value="xml" />
+<xsd:enumeration value="csv" />
+<xsd:enumeration value="txt" />
+<xsd:enumeration value="pdf" />
+<xsd:enumeration value="xls" />
+<xsd:enumeration value="xlsx" />
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="RespFileNameT">
+<xsd:restriction base="xsd:string">
+<!--<xsd:enumeration value="CS" />
+<xsd:enumeration value="CC" />
+<xsd:enumeration value="CT" />
+<xsd:enumeration value="SS" />
+<xsd:enumeration value="SA" />
+<xsd:enumeration value="SR" />
+<xsd:enumeration value="LA" />
+<xsd:enumeration value="LC" /> -->
+<xsd:maxLength value="19"/>
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="RespFileHeaderT">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="Yes" />
+<xsd:enumeration value="No" />
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="RespFileModeT">
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="OFFLINE" />
+<xsd:enumeration value="ONLINE" />
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="RespFilePathT">
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+<xsd:simpleType name="RespSecretKeyT">
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+
+</xsd:simpleType>
+<xsd:simpleType name="RespInitializationVectorT">
+<xsd:restriction base="xsd:string">
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:schema>

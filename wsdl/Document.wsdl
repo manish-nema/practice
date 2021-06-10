@@ -1,0 +1,70 @@
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:vbs="http://documentservice.vodafoneIdea.com/vbs/Document/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Document" targetNamespace="http://documentservice.vodafoneIdea.com/vbs/Document/">
+	<wsdl:types>
+		<xsd:schema xmlns:vbo="http://documentservice.vodafoneIdea.com/vbo" targetNamespace="http://documentservice.vodafoneIdea.com/vbs/Document/">
+
+
+			<xsd:import namespace="http://documentservice.vodafoneIdea.com/vbo" schemaLocation="DocumentRequest.xsd">
+			</xsd:import>
+
+
+			<xsd:import namespace="http://documentservice.vodafoneIdea.com/vbo" schemaLocation="DocumentResponse.xsd">
+			</xsd:import>
+
+			<xsd:element name="GetDocumentList">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="request" type="vbo:DocumentRequest"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="GetDocumentListResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="response" type="vbo:DocumentResponse"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+
+		</xsd:schema>
+	</wsdl:types>
+
+	<wsdl:message name="GetDocumentListRequest">
+		<wsdl:part element="vbs:GetDocumentList" name="DocumentCriteria">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="GetDocumentListResponse">
+		<wsdl:part element="vbs:GetDocumentListResponse" name="DocumentList">
+		</wsdl:part>
+	</wsdl:message>
+
+	<wsdl:portType name="Document">
+		<wsdl:operation name="GetDocumentList">
+			<wsdl:input message="vbs:GetDocumentListRequest"/>
+			<wsdl:output message="vbs:GetDocumentListResponse"/>
+		</wsdl:operation>
+
+	</wsdl:portType>
+
+	<wsdl:binding name="DocumentSOAP" type="vbs:Document">
+
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="GetDocumentList">
+
+			<soap:operation wsdl:required="false"/>
+			<wsdl:input>
+
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="DocumentService">
+		<wsdl:port binding="vbs:DocumentSOAP" name="Document">
+
+			<soap:address location="https://10.94.134.127:9443/GetIdeaDocument/services/Document"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

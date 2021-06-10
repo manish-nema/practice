@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified"
+	targetNamespace="http://documentservice.vodafoneIdea.com/vbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vbo="http://documentservice.vodafoneIdea.com/vbo">
+	<xsd:complexType name="DocumentRequest">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1"
+				name="department" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1"
+				name="requestType" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="userId"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="password"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="circleId"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1"
+				name="connectionType" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="cellNo"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="contractNo" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="docType"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="channel"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1"
+				name="channelUserId" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="1" name="IP"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0" name="fromDate"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0" name="toDate"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="documentType" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="attribute1" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="attribute2" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="attribute3" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="attribute4" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="attribute5" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

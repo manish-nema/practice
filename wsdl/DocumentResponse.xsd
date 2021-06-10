@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified"
+	targetNamespace="http://documentservice.vodafoneIdea.com/vbo" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vbo="http://documentservice.vodafoneIdea.com/vbo">
+	<xsd:complexType name="DocumentResponse">
+		<xsd:sequence>
+			<xsd:element maxOccurs="1" minOccurs="1" name="errorCode"
+				type="xsd:string" />
+			<xsd:element minOccurs="1" name="errorDescription"
+				type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="documentName" type="xsd:string" />
+			<xsd:element maxOccurs="1" minOccurs="0"
+				name="documentContent" type="xsd:base64Binary" />
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

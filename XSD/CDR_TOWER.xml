@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:Request xmlns:tns="http://www.example.org/ReqFileFormat2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/ReqFileFormat2 inputRequest.xsd ">
+  <RequestDetails>
+    <RequestType>CDR_TOWER</RequestType>
+    <RequestEntity>
+      <Tower>
+        <CellId>CellId</CellId>
+        <Circle>Circle</Circle>
+      </Tower>
+    </RequestEntity>
+    <RequestTime>2001-12-31T12:00:00</RequestTime>
+    <StartDate>2001-12-31T12:00:00</StartDate>
+    <EndDate>2001-12-31T12:00:00</EndDate>
+    <ServiceType>GSM_VOICE</ServiceType>
+    <Priority>LOW</Priority>
+    <DataType>All</DataType>
+    <Remarks>Remarks</Remarks>
+  </RequestDetails>
+  <RespFileProp>
+    <RespFileType>doc</RespFileType>
+    <RespFileName>RespFileName</RespFileName>
+    <RespFileHeader>Yes</RespFileHeader>
+    <RespFileMode>OFFLINE</RespFileMode>
+    <RespFilePath>RespFilePath</RespFilePath>
+    <RespSecretKey>RespSecretKey</RespSecretKey>
+    <RespInitializationVector>RespInitializationVector</RespInitializationVector>
+  </RespFileProp>
+</tns:Request>
